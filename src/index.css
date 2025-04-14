@@ -1,6 +1,12 @@
 @import "tailwindcss";
 
-*{
+@theme{
+  --color-navyBlue: #0c1122;
+  --color-softElectricBlue: #267FE8;
+  --color-lightGray: #e5e7eb;
+}
+
+html{
   padding: 0;
   margin: 0;
   box-sizing: border-box;
