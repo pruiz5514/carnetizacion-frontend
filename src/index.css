@@ -4,6 +4,10 @@
   --color-navyBlue: #0c1122;
   --color-softElectricBlue: #267FE8;
   --color-lightGray: #e5e7eb;
+  --color-shadowBG: rgba(0,0,0,0.6);
+  --color-royalBlue: #0f59dd;
+  --color-orange: #fb7c00;
+  --color-warningRed: #f44336;
 }
 
 html{

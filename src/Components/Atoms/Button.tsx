@@ -9,7 +9,7 @@ const Button:React.FC<IButtonProps> = ({children, onClick, width}) => {
     <button onClick={(event) => {
       event.stopPropagation();
       if (onClick) onClick(); 
-    }}  className= {`bg-softElectricBlue text-white px-3 py-2 rounded-lg cursor-pointer ${width}`}> {children} </button>
+    }}  className= {`bg-orange text-white px-3 py-2 rounded-lg cursor-pointer ${width}`}> {children} </button>
   )
 }
 

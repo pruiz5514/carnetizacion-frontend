@@ -30,8 +30,12 @@ const LoginForm = () => {
     const handleLogin = async (data:ILogin) => {
         try{
             const response = await useLoginService.login('auth/login', data);
-            dispatch(login({user: response.user.email, role: response.user.role ,token:response.token}))
-            alert('bien')
+            dispatch(login({user: response.user.email, role: response.user.role ,token:response.token, id: response.user.id}))
+            if(response.user.role === "Administrator"){
+                navigate('/administrator/dashboard')
+            }else{
+                navigate('/establishment/dashboard')
+            }
         } catch(error){
             reset({ email: "", password: "" })
         }
