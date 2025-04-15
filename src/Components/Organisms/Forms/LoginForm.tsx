@@ -1,7 +1,7 @@
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { LoginService } from '../../../App/Infreaestructure/services/login.service'
 import { ILogin } from '../../../App/Core/application/dto/login/login.dto'
 import FormField from '../../Molecules/FormField'
@@ -32,7 +32,7 @@ const LoginForm = () => {
             const response = await useLoginService.login('auth/login', data);
             dispatch(login({user: response.user.email, role: response.user.role ,token:response.token, id: response.user.id}))
             if(response.user.role === "Administrator"){
-                navigate('/administrator/dashboard')
+                navigate('/administrator/establishments')
             }else{
                 navigate('/establishment/dashboard')
             }
