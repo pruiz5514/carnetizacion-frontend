@@ -5,7 +5,6 @@ import { RootState } from "../../../../Redux/store";
 import { EstablismentService } from "../../../Infreaestructure/services/establishment.service";
 import { useEffect, useState } from "react";
 import { IEstablishments } from "../../../Core/application/dto/establishment/get-establishments.dto";
-import Button from "../../../../Components/Atoms/Button";
 
 function AdministratorEstablishments() {
   const token = useSelector((state: RootState) => state.auth.token);
