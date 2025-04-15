@@ -5,6 +5,7 @@ import { RootState } from "../../../../Redux/store";
 import { EstablismentService } from "../../../Infreaestructure/services/establishment.service";
 import { useEffect, useState } from "react";
 import { IEstablishments } from "../../../Core/application/dto/establishment/get-establishments.dto";
+import EstablismentModal from "../../../../Components/Molecules/Modals/EstablismentModal";
 
 function AdministratorEstablishments() {
   const token = useSelector((state: RootState) => state.auth.token);
@@ -15,6 +16,8 @@ function AdministratorEstablishments() {
   const useEstablishmentService = new EstablismentService(baseUrl, token)
 
   const [establishments, setEstablishments] = useState<IEstablishments[]>([])
+
+  const [openModal, setOpenModal] = useState(false)
 
   useEffect(()=>{
     const getEstablishments = async()=>{
@@ -28,8 +31,10 @@ function AdministratorEstablishments() {
       <h1 className="text-5xl text-center mb-8">Establecimientos</h1>
 
       <div className="w-full flex justify-center mb-8">
-        <button className="bg-orange text-white px-3 py-2 rounded-lg cursor-pointer text-2xl">Agregar establecimiento</button>
+        <button onClick={()=>setOpenModal(true)} className="bg-orange text-white px-3 py-2 rounded-lg cursor-pointer text-2xl">Agregar establecimiento</button>
       </div>
+
+      {openModal && <EstablismentModal closeModal={()=>setOpenModal(false)}/>}
 
       <EstablishmentsTable data={establishments}/>
     </AdministratorLayout>

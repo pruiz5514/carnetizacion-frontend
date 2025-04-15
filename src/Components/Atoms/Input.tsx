@@ -21,7 +21,7 @@ const Input = ({
             {...props}
             className="w-full border border-solid border-lightGray h-12 px-4 rounded-lg focus:outline-none"
         />
-        {error && <p className="text-redError">{error}</p>}
+        {error && <p className="text-warningRed">{error}</p>}
     </div>
   )
 }
