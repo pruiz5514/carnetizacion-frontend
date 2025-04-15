@@ -9,6 +9,8 @@ import TrHead from '../../Atoms/Table/TrHead'
 import TrBody from '../../Atoms/Table/TrBody'
 import { IEstablishments } from '../../../App/Core/application/dto/establishment/get-establishments.dto'
 import TableOptions from '../../Atoms/Table/TableOptions'
+import { useState } from 'react'
+import UpdateEstablishmentModal from '../../Organisms/Modals/UpdateEstablishmentModal'
 
 interface IEstablishmentsTableProps{
     data: IEstablishments[]
@@ -16,7 +18,15 @@ interface IEstablishmentsTableProps{
 
 const EstablishmentsTable:React.FC<IEstablishmentsTableProps> = ({data}) => {
 
-    console.log(data)
+  const [updateModal, setUpdateModal] = useState(false);
+
+  const [idSelected, setIdSelected] = useState('');
+
+  const openModal = (id:string)=>{
+    setIdSelected(id)
+    setUpdateModal(true)
+  }
+
   return (
     <TableContainer>
         <Table>
@@ -45,12 +55,16 @@ const EstablishmentsTable:React.FC<IEstablishmentsTableProps> = ({data}) => {
                             dateStyle: "medium"
                         })}
                     </Td>
-                    <Td><TableOptions/> </Td>
+                    <Td><TableOptions openModal={()=>openModal(establishment.id)}/> </Td>
                   </TrBody>
                 ))
               }
             </Tbody>
         </Table>
+
+        {
+          updateModal && <UpdateEstablishmentModal establishmentId={idSelected} closeModal={()=>setUpdateModal(false)}/>
+        }
     </TableContainer>
   )
 }

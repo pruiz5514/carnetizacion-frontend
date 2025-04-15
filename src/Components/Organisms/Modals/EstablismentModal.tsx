@@ -1,6 +1,6 @@
 import { IoClose } from 'react-icons/io5';
 import Modal from '../../Atoms/Modal/Modal'
-import EstablishmentForm from '../../Organisms/Forms/EstablishmentForm'
+import EstablishmentForm from '../Forms/EstablishmentForm'
 
 interface IEstablishmentsModalProps{
     closeModal: ()=> void;

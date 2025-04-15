@@ -4,14 +4,12 @@ import { useForm } from 'react-hook-form'
 import Form from '../../Atoms/Form'
 import FormField from '../../Molecules/FormField'
 import Button from '../../Atoms/Button'
-import { IPostEstablishmentsForm } from '../../../App/Core/application/dto/establishment/post-establishment.dto'
 import { EstablismentService } from '../../../App/Infreaestructure/services/establishment.service'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../../Redux/store'
+import { IPutEstablishments } from '../../../App/Core/application/dto/establishment/put-establishment.dto'
 
-
-
-const EstablishmentSchema = yup.object()
+const UpdateEstablishmentSchema = yup.object()
     .shape({
         fullname: yup
             .string().min(3, 'El nombre debe tener al menos 3 caracteres')
@@ -33,29 +31,25 @@ const EstablishmentSchema = yup.object()
         establishment_address: yup
             .string().min(3, 'Digite una dirección válida.')
             .required('La dirección del establecimiento es requerida.'),
-        password: yup 
-            .string().min(3, 'La contraseña debe tener al menos 3 caracteres')
-            .required('La constraseña es requerida'),
     })
 
 
 interface IEstablishmentFormProps{
     closeModal: ()=> void
+    establishment: IPutEstablishments
+    establishmentId: string
 }
 
-const EstablishmentForm:React.FC<IEstablishmentFormProps> = ({closeModal}) => {
+const UpdateEstablishmentForm:React.FC<IEstablishmentFormProps> = ({closeModal, establishment, establishmentId}) => {
     const token = useSelector((state: RootState) => state.auth.token);
+    console.log(token)
     const baseUrl = import.meta.env.VITE_BACK_HOST;
     if (!token) return;
     const useEstablishmentService = new EstablismentService(baseUrl,token)
 
-    const handleCreate = async (data:IPostEstablishmentsForm) => {
+    const handleUpdate = async (data:IPutEstablishments) => {
         try{
-            const establishment = {
-                ...data,
-                "role_id": 2
-            }
-            const response = await useEstablishmentService.postEstablishment('establishment', establishment);
+            const response = await useEstablishmentService.updateEstablishment('establishment',establishmentId, data);
             closeModal()
             return response
         } catch(error){
@@ -67,16 +61,16 @@ const EstablishmentForm:React.FC<IEstablishmentFormProps> = ({closeModal}) => {
     const {
         control, 
         handleSubmit,
-        formState: {errors}
-    } = useForm<IPostEstablishmentsForm>({
+        formState: {errors},
+    } = useForm<IPutEstablishments>({
         mode: "onChange",
         reValidateMode: "onChange",
-        resolver: yupResolver(EstablishmentSchema)
+        resolver: yupResolver(UpdateEstablishmentSchema),
+        defaultValues: establishment
     })
-
   return (
-    <Form onSubmit={handleSubmit(handleCreate)}>
-        <FormField<IPostEstablishmentsForm>
+    <Form onSubmit={handleSubmit(handleUpdate)}>
+        <FormField<IPutEstablishments>
             type="text"
             label="Nombre del encargado" 
             name="fullname"
@@ -84,7 +78,7 @@ const EstablishmentForm:React.FC<IEstablishmentFormProps> = ({closeModal}) => {
             error={errors.fullname}
             control={control}
         />
-        <FormField<IPostEstablishmentsForm>
+        <FormField<IPutEstablishments>
             type="email"
             label="Correo electronico" 
             name="email"
@@ -92,7 +86,7 @@ const EstablishmentForm:React.FC<IEstablishmentFormProps> = ({closeModal}) => {
             error={errors.email}
             control={control}
         />
-         <FormField<IPostEstablishmentsForm>
+         <FormField<IPutEstablishments>
             type="number"
             label="Número telefonico" 
             name="phone_number"
@@ -100,7 +94,7 @@ const EstablishmentForm:React.FC<IEstablishmentFormProps> = ({closeModal}) => {
             error={errors.phone_number}
             control={control}
         />
-        <FormField<IPostEstablishmentsForm>
+        <FormField<IPutEstablishments>
             type="text"
             label="Nombre del estableciemiento" 
             name="establishment_name"
@@ -108,20 +102,12 @@ const EstablishmentForm:React.FC<IEstablishmentFormProps> = ({closeModal}) => {
             error={errors.establishment_name}
             control={control}
         />
-        <FormField<IPostEstablishmentsForm>
+        <FormField<IPutEstablishments>
             type="text"
             label="Dirección del estableciemiento" 
             name="establishment_address"
             placeholder="Weena 505, Office 30.40, 3013 AL Rotterdam"
             error={errors.establishment_address}
-            control={control}
-        />
-        <FormField<IPostEstablishmentsForm>
-            type="password"
-            label="Contraseña" 
-            name="password"
-            placeholder="********"
-            error={errors.password}
             control={control}
         />
 
@@ -131,4 +117,4 @@ const EstablishmentForm:React.FC<IEstablishmentFormProps> = ({closeModal}) => {
   )
 }
 
-export default EstablishmentForm
+export default UpdateEstablishmentForm
