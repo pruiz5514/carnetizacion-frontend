@@ -1,0 +1,34 @@
+
+.html5-qrcode-scanner-footer {
+display: none 
+}
+
+button.html5-qrcode-element {
+background-color:  #fb7c00;
+color: white;
+border-radius: 8px;
+padding: 8px 15px;
+margin-bottom: 10px;
+}
+  
+
+div#reader div[class*="__dashboard_section"] div[title="Info"] {
+display: none ;
+}
+
+#reader img[alt="Info icon"] {
+display: none ;
+}
+
+#reader__scan_region {
+display: flex;
+justify-content: center;
+padding: 15px
+}
+
+#reader__scan_region img{
+width:100%;
+min-width: 20px;
+max-width: 250px;
+}
+
