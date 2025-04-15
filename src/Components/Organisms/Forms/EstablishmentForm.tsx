@@ -41,9 +41,10 @@ const EstablishmentSchema = yup.object()
 
 interface IEstablishmentFormProps{
     closeModal: ()=> void
+    getEstablishments: ()=> void
 }
 
-const EstablishmentForm:React.FC<IEstablishmentFormProps> = ({closeModal}) => {
+const EstablishmentForm:React.FC<IEstablishmentFormProps> = ({closeModal, getEstablishments}) => {
     const token = useSelector((state: RootState) => state.auth.token);
     const baseUrl = import.meta.env.VITE_BACK_HOST;
     if (!token) return;
@@ -56,6 +57,7 @@ const EstablishmentForm:React.FC<IEstablishmentFormProps> = ({closeModal}) => {
                 "role_id": 2
             }
             const response = await useEstablishmentService.postEstablishment('establishment', establishment);
+            getEstablishments()
             closeModal()
             return response
         } catch(error){

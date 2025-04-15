@@ -19,14 +19,16 @@ function AdministratorEstablishments() {
 
   const [openModal, setOpenModal] = useState(false)
 
+  const getEstablishments = async()=>{
+    setEstablishments( await useEstablishmentService.getEstablisments('establishment'));
+}
+
   const deleteEstablishment = async(id:string)=>{
     await useEstablishmentService.deleteEstablishment('establishment',id)
+    setEstablishments(prev => prev.filter(est => est.id !== id));
   }
 
   useEffect(()=>{
-    const getEstablishments = async()=>{
-        setEstablishments( await useEstablishmentService.getEstablisments('establishment'));
-    }
     getEstablishments()
   },[])
 
@@ -38,9 +40,9 @@ function AdministratorEstablishments() {
         <button onClick={()=>setOpenModal(true)} className="bg-orange text-white px-3 py-2 rounded-lg cursor-pointer text-2xl">Agregar establecimiento</button>
       </div>
 
-      {openModal && <EstablismentModal closeModal={()=>setOpenModal(false)}/>}
+      {openModal && <EstablismentModal getEstablishments={getEstablishments} closeModal={()=>setOpenModal(false)}/>}
 
-      <EstablishmentsTable deleteEstablishment={(id)=>deleteEstablishment(id)} data={establishments}/>
+      <EstablishmentsTable getEstablishments={getEstablishments} deleteEstablishment={(id)=>deleteEstablishment(id)} data={establishments}/>
     </AdministratorLayout>
   )
 }

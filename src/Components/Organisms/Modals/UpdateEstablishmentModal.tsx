@@ -10,10 +10,11 @@ import { EstablismentService } from '../../../App/Infreaestructure/services/esta
 interface IUpdateEstablishmentsModalProps{
     closeModal: ()=> void;
     establishmentId: string
+    getEstablishments: ()=> void
 }
 
 
-const UpdateEstablishmentModal:React.FC<IUpdateEstablishmentsModalProps> = ({closeModal, establishmentId}) => {
+const UpdateEstablishmentModal:React.FC<IUpdateEstablishmentsModalProps> = ({closeModal, establishmentId, getEstablishments}) => {
   const token = useSelector((state: RootState) => state.auth.token);
   const baseUrl = import.meta.env.VITE_BACK_HOST;
   if (!token) return;
@@ -36,7 +37,7 @@ const UpdateEstablishmentModal:React.FC<IUpdateEstablishmentsModalProps> = ({clo
   return (
     <Modal>
         <button onClick={closeModal} className="absolute top-2 right-2 text-4xl cursor-pointer"><IoClose /></button>
-        <UpdateEstablishmentForm closeModal={closeModal} establishment={data} establishmentId={establishment.id}/>
+        <UpdateEstablishmentForm getEstablishments={getEstablishments} closeModal={closeModal} establishment={data} establishmentId={establishment.id}/>
     </Modal>
   )
 }

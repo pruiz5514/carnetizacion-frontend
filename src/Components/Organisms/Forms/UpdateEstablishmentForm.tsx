@@ -38,9 +38,10 @@ interface IEstablishmentFormProps{
     closeModal: ()=> void
     establishment: IPutEstablishments
     establishmentId: string
+    getEstablishments: ()=> void
 }
 
-const UpdateEstablishmentForm:React.FC<IEstablishmentFormProps> = ({closeModal, establishment, establishmentId}) => {
+const UpdateEstablishmentForm:React.FC<IEstablishmentFormProps> = ({closeModal, establishment, establishmentId, getEstablishments}) => {
     const token = useSelector((state: RootState) => state.auth.token);
     console.log(token)
     const baseUrl = import.meta.env.VITE_BACK_HOST;
@@ -50,6 +51,7 @@ const UpdateEstablishmentForm:React.FC<IEstablishmentFormProps> = ({closeModal, 
     const handleUpdate = async (data:IPutEstablishments) => {
         try{
             const response = await useEstablishmentService.updateEstablishment('establishment',establishmentId, data);
+            getEstablishments()
             closeModal()
             return response
         } catch(error){
@@ -111,7 +113,7 @@ const UpdateEstablishmentForm:React.FC<IEstablishmentFormProps> = ({closeModal, 
             control={control}
         />
 
-        <Button>Crear estableciemiento</Button>
+        <Button>Editar estableciemiento</Button>
 
     </Form>
   )
