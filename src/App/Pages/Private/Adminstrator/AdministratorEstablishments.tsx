@@ -19,6 +19,10 @@ function AdministratorEstablishments() {
 
   const [openModal, setOpenModal] = useState(false)
 
+  const deleteEstablishment = async(id:string)=>{
+    await useEstablishmentService.deleteEstablishment('establishment',id)
+  }
+
   useEffect(()=>{
     const getEstablishments = async()=>{
         setEstablishments( await useEstablishmentService.getEstablisments('establishment'));
@@ -36,7 +40,7 @@ function AdministratorEstablishments() {
 
       {openModal && <EstablismentModal closeModal={()=>setOpenModal(false)}/>}
 
-      <EstablishmentsTable data={establishments}/>
+      <EstablishmentsTable deleteEstablishment={(id)=>deleteEstablishment(id)} data={establishments}/>
     </AdministratorLayout>
   )
 }

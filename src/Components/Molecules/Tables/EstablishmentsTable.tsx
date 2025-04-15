@@ -14,9 +14,10 @@ import UpdateEstablishmentModal from '../../Organisms/Modals/UpdateEstablishment
 
 interface IEstablishmentsTableProps{
     data: IEstablishments[]
+    deleteEstablishment: (id:string)=>void
 }
 
-const EstablishmentsTable:React.FC<IEstablishmentsTableProps> = ({data}) => {
+const EstablishmentsTable:React.FC<IEstablishmentsTableProps> = ({data, deleteEstablishment}) => {
 
   const [updateModal, setUpdateModal] = useState(false);
 
@@ -55,7 +56,7 @@ const EstablishmentsTable:React.FC<IEstablishmentsTableProps> = ({data}) => {
                             dateStyle: "medium"
                         })}
                     </Td>
-                    <Td><TableOptions openModal={()=>openModal(establishment.id)}/> </Td>
+                    <Td><TableOptions deleteEstablishment={(id)=>deleteEstablishment(id)} id={establishment.id} openModal={()=>openModal(establishment.id)}/> </Td>
                   </TrBody>
                 ))
               }

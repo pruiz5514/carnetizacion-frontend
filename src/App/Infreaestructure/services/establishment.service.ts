@@ -52,6 +52,15 @@ export class EstablismentService{
             errorAlert((error as { message: string }).message);
             throw error
         }
+    }
 
+    async deleteEstablishment(url:string, id:string){
+        try{
+            await this.httpClient.delete<string>(`${url}/${id}`);
+            successAlert('Establecimiento eliminado exitosamente')
+        }catch(error){
+            errorAlert((error as { message: string }).message);
+            throw error
+        }
     }
 }
