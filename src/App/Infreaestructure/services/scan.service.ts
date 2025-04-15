@@ -1,3 +1,4 @@
+import { IScanByEstablishment } from "../../Core/application/dto/scan/get-scan-establishment.dto";
 import { IPostScanResponse } from "../../Core/application/dto/scan/post-scan-response.dto";
 import { IPostScan } from "../../Core/application/dto/scan/post-scan.dto";
 import { errorAlert, successAlert } from "../utils/alerts";
@@ -17,6 +18,16 @@ export class ScanService{
             return scan
         } catch(error){
             errorAlert((error as { message: string }).message);
+            console.log(error);
+            throw error
+        }
+    }
+
+    async getByEstablishmentId(url:string, id:string){
+        try{
+            const scan = await this.httpClient.get<IScanByEstablishment[]>(`${url}/${id}`);
+            return scan
+        }catch(error){
             console.log(error);
             throw error
         }

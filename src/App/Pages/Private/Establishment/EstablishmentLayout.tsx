@@ -23,9 +23,10 @@ const EstablishmentLayout:React.FC<IEstablishmentLayoutProps> = ({children}) => 
 
   return (
     <>
-        <Header linkLogo="/dashboard">
+        <Header linkLogo="/establishment/dashboard">
             <li><Link to='/establishment/dashboard'>Inicio</Link></li>
-            <li><Link to='/'><Button onClick={logOut} >Cerrar sesión</Button></Link></li>
+            <li><Link to='/establishment/records'>Registros</Link></li>
+            <li><Button onClick={logOut} >Cerrar sesión</Button></li>
         </Header>
         <main className="w-full min-h-[100vh] flex justify-center">
             <div className="w-full max-w-[1600px] px-4 mt-[120px]">
