@@ -90,7 +90,7 @@ const EstablishmentForm:React.FC<IEstablishmentFormProps> = ({closeModal, getEst
             type="email"
             label="Correo electronico" 
             name="email"
-            placeholder="juan@getfit.com"
+            placeholder="juan@gfit4taal.com"
             error={errors.email}
             control={control}
         />

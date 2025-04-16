@@ -25,7 +25,7 @@ const AdministratorLayout:React.FC<IAdministratorLayoutProps> = ({children}) => 
     <>
         <Header linkLogo="/administrator/establishments">
             <li><Link to='/administrator/establishments'>Establecimientos</Link></li>
-            <li><Link to='/establishment/records'>Estudiantes</Link></li>
+            <li><Link to='/administrator/students'>Estudiantes</Link></li>
             <li><Button onClick={logOut} >Cerrar sesión</Button></li>
         </Header>
         <main className="w-full min-h-[100vh] flex justify-center">

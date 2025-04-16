@@ -6,6 +6,7 @@ import ApplyDiscount from "./Private/Establishment/ApplyDiscount"
 import EstablishmentRecords from "./Private/Establishment/EstablishmentRecords"
 import AdministratorEstablishments from "./Private/Adminstrator/AdministratorEstablishments"
 import Establishment from "./Private/Adminstrator/Establishment"
+import AdminstratorStudents from "./Private/Adminstrator/AdminstratorStudents"
 
 function App() {
   return (
@@ -18,7 +19,8 @@ function App() {
         <Route path="apply-discount/:id" element={<ApplyDiscount/>}/>
         <Route path="/establishment/records" element={<EstablishmentRecords/>}/>
         <Route path="/administrator/establishments/:id" element={<Establishment/>}/>
-        <Route path="/administrator/students" element={<Establishment/>}/>
+        <Route path="/administrator/students" element={<AdminstratorStudents/>}/>
+
       </Route>
    </Routes>
   )

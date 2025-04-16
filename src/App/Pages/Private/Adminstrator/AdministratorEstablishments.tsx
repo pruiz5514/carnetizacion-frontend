@@ -9,9 +9,8 @@ import EstablismentModal from "../../../../Components/Organisms/Modals/Establism
 
 function AdministratorEstablishments() {
   const token = useSelector((state: RootState) => state.auth.token);
-  const establishmentId = useSelector((state: RootState) => state.auth.id)
   const baseUrl = import.meta.env.VITE_BACK_HOST;
-  if (!token || !establishmentId) return;
+  if (!token) return;
 
   const useEstablishmentService = new EstablismentService(baseUrl, token)
 
