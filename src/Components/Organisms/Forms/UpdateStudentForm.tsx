@@ -4,10 +4,8 @@ import { useForm } from 'react-hook-form'
 import Form from '../../Atoms/Form'
 import FormField from '../../Molecules/FormField'
 import Button from '../../Atoms/Button'
-import { EstablismentService } from '../../../App/Infreaestructure/services/establishment.service'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../../Redux/store'
-import { IPutEstablishments } from '../../../App/Core/application/dto/establishment/put-establishment.dto'
 import { IPostStudents } from '../../../App/Core/application/dto/student/post-student.dto'
 import FormFiledSelect from '../../Molecules/FormFieldSelect'
 import { StudentService } from '../../../App/Infreaestructure/services/student.service'
@@ -44,7 +42,7 @@ const UpdateStudentForm:React.FC<IStudentFormProps> = ({closeModal, student, stu
 
     const handleUpdate = async (data:IPostStudents) => {
         try{
-            const response = await useStudentService.updateStudent('establishment',studentId, data);
+            const response = await useStudentService.updateStudent('student',studentId, data);
             getStudents()
             closeModal()
             return response
@@ -102,7 +100,7 @@ const UpdateStudentForm:React.FC<IStudentFormProps> = ({closeModal, student, stu
         </FormFiledSelect>
 
 
-        <Button>Editar estableciemiento</Button>
+        <Button>Editar estudiante</Button>
 
     </Form>
   )

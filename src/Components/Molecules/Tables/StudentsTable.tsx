@@ -60,7 +60,7 @@ const StudentsTable: React.FC<IStudentsTableProps> = ({data,deleteStudent, getSt
         </Table>
 
         {
-            updateModal && <UpdateStudentModal getEstablishments={getStudents} establishmentId={idSelected} closeModal={()=>setUpdateModal(false)}/>
+            updateModal && <UpdateStudentModal getStudents={getStudents} studentId={idSelected} closeModal={()=>setUpdateModal(false)}/>
         }
     </TableContainer>
   )

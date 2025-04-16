@@ -1,13 +1,11 @@
 import { IoClose } from 'react-icons/io5';
 import Modal from '../../Atoms/Modal/Modal'
-import UpdateEstablishmentForm from '../Forms/UpdateEstablishmentForm';
 import { useEffect, useState } from 'react';
-import { IEstablishments } from '../../../App/Core/application/dto/establishment/get-establishments.dto';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../Redux/store';
-import { EstablismentService } from '../../../App/Infreaestructure/services/establishment.service';
 import UpdateStudentForm from '../Forms/UpdateStudentForm';
 import { StudentService } from '../../../App/Infreaestructure/services/student.service';
+import { IStudents } from '../../../App/Core/application/dto/student/get-students.dto';
 
 interface IUpdateStudentModalProps{
     closeModal: ()=> void;
@@ -22,24 +20,23 @@ const UpdateStudentModal:React.FC<IUpdateStudentModalProps> = ({closeModal, stud
   if (!token) return;
   const useStudentService = new StudentService(baseUrl,token)
 
-    const [establishment, setEstablishment] = useState<IEstablishments | null>(null)
+    const [student, setStudent] = useState<IStudents | null>(null)
     
 
     useEffect(() => {
-        const getEstablishmentById = async () => {
-            const data = await useEstablishmentService.getEstablishmentById('student', studentId);
-            setEstablishment(data);
+        const getStudentById = async () => {
+            const data = await useStudentService.getStudentById('student/id', studentId);
+            setStudent(data);
         };
-        getEstablishmentById();
+        getStudentById();
     }, []);
 
-      if(!establishment) return
+      if(!student) return
 
-      const {id, role_id, createdAt, ...data} = establishment
   return (
     <Modal>
         <button onClick={closeModal} className="absolute top-2 right-2 text-4xl cursor-pointer"><IoClose /></button>
-        <UpdateStudentForm getStudents={getStudents} closeModal={closeModal} student={data} establishmentId={establishment.id}/>
+        <UpdateStudentForm getStudents={getStudents} closeModal={closeModal} student={student} studentId={student.id}/>
     </Modal>
   )
 }
