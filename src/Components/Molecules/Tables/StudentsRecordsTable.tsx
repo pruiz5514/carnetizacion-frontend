@@ -7,20 +7,21 @@ import Tbody from '../../Atoms/Table/Tbody'
 import Td from '../../Atoms/Table/Td'
 import TrHead from '../../Atoms/Table/TrHead'
 import TrBody from '../../Atoms/Table/TrBody'
-import { IScanByEstablishment } from '../../../App/Core/application/dto/scan/get-scan-establishment.dto'
+import { IScanStudents } from '../../../App/Core/application/dto/scan/get-scan-student.dto'
 
-interface IEstablishemtRecordsTableProps{
-  data: IScanByEstablishment[]
+interface IStudentsRecordsTableProps{
+  data: IScanStudents[]
 }
 
-const EstablishemtRecordsTable:React.FC<IEstablishemtRecordsTableProps> = ({data}) => {
+const StudentsRecordsTable:React.FC<IStudentsRecordsTableProps> = ({data}) => {
   return (
     <TableContainer>
         <Table>
             <Thead>
               <TrHead>
-                <Th>Estudiante</Th>
+                <Th>Establecimiento</Th>
                 <Th>Email</Th>
+                <Th>Dirección</Th>
                 <Th>Fecha de compra</Th>
               </TrHead>
             </Thead>
@@ -28,8 +29,9 @@ const EstablishemtRecordsTable:React.FC<IEstablishemtRecordsTableProps> = ({data
               {
                 data.map((records)=>(
                  <TrBody key={records.id}>
-                    <Td>{records.student.fullname}</Td>
-                    <Td>{records.student.email}</Td>
+                    <Td>{records.establishment.establishment_name}</Td>
+                    <Td>{records.establishment.email}</Td>
+                    <Td>{records.establishment.establishment_address}</Td>
                     <Td>{new Date(records.scanned_at).toLocaleString("es-CO", {
                       dateStyle: "medium",
                       timeStyle: "short"
@@ -44,4 +46,4 @@ const EstablishemtRecordsTable:React.FC<IEstablishemtRecordsTableProps> = ({data
   )
 }
 
-export default EstablishemtRecordsTable
+export default StudentsRecordsTable

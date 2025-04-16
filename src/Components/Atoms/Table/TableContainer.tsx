@@ -4,7 +4,7 @@ interface ITableContainerProps{
 
 const TableContainer:React.FC<ITableContainerProps> = ({children}) => {
   return (
-    <div className="hidden md:block overflow-x-auto pb-8">
+    <div className="overflow-x-auto pb-8">
         {children}
     </div>
   )

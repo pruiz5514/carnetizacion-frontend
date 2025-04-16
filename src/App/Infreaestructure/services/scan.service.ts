@@ -1,4 +1,5 @@
 import { IScanByEstablishment } from "../../Core/application/dto/scan/get-scan-establishment.dto";
+import { IScanStudents } from "../../Core/application/dto/scan/get-scan-student.dto";
 import { IPostScanResponse } from "../../Core/application/dto/scan/post-scan-response.dto";
 import { IPostScan } from "../../Core/application/dto/scan/post-scan.dto";
 import { errorAlert, successAlert } from "../utils/alerts";
@@ -23,9 +24,19 @@ export class ScanService{
         }
     }
 
-    async getByEstablishmentId(url:string, id:string){
+    async getByEstablishmentId(url:string, id:string):Promise<IScanByEstablishment[]>{
         try{
             const scan = await this.httpClient.get<IScanByEstablishment[]>(`${url}/${id}`);
+            return scan
+        }catch(error){
+            console.log(error);
+            throw error
+        }
+    }
+
+    async getByStudentId(url:string, id:string):Promise<IScanStudents[]>{
+        try{
+            const scan = await this.httpClient.get<IScanStudents[]>(`${url}/${id}`);
             return scan
         }catch(error){
             console.log(error);
