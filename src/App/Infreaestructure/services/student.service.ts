@@ -41,4 +41,14 @@ export class StudentService{
             throw error
         }
     }
+
+    async deleteStudent(url:string, id:string){
+        try{
+            await this.httpClient.delete<string>(`${url}/${id}`);
+            successAlert('Estudiante eliminado exitosamente')
+        }catch(error){
+            errorAlert((error as { message: string }).message);
+            throw error
+        }
+    }
 }

@@ -21,6 +21,12 @@ function AdminstratorStudents() {
         setStudents(await useStudentServie.getAllStudents('student'))
     }
 
+    const deleteStudent = async(id:string)=>{
+        await useEstablishmentService.deleteEstablishment('establishment',id)
+        setEstablishments(prev => prev.filter(est => est.id !== id));
+      }
+    
+
     useEffect(()=>{
         getStudents();
     },[])
