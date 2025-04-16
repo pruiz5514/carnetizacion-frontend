@@ -22,9 +22,10 @@ function AdminstratorStudents() {
     }
 
     const deleteStudent = async(id:string)=>{
-        await useEstablishmentService.deleteEstablishment('establishment',id)
-        setEstablishments(prev => prev.filter(est => est.id !== id));
+        await useStudentServie.deleteStudent('student',id)
+        setStudents(prev => prev.filter(est => est.id !== id));
       }
+    
     
 
     useEffect(()=>{
@@ -41,7 +42,7 @@ function AdminstratorStudents() {
 
         {openModal && <StudentModal getStudents={getStudents} closeModal={()=>setOpenModal(false)}/>}
 
-        <StudentsTable data={students}/>
+        <StudentsTable deleteStudent={deleteStudent} data={students}/>
     </AdministratorLayout>
   )
 }
