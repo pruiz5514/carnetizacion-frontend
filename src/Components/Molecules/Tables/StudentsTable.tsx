@@ -9,13 +9,15 @@ import Td from '../../Atoms/Table/Td'
 import { IStudents } from '../../../App/Core/application/dto/student/get-students.dto'
 import TableOptions from '../../Atoms/Table/TableOptions'
 import { useState } from 'react'
+import UpdateStudentModal from '../../Organisms/Modals/UpdateStudentModal'
 
 interface IStudentsTableProps{
     data: IStudents[]
     deleteStudent: (id:string)=>void
+    getStudents: ()=>void
 }
 
-const StudentsTable: React.FC<IStudentsTableProps> = ({data,deleteStudent}) => {
+const StudentsTable: React.FC<IStudentsTableProps> = ({data,deleteStudent, getStudents}) => {
     const [updateModal, setUpdateModal] = useState(false);
   
     const [idSelected, setIdSelected] = useState('');
@@ -50,16 +52,16 @@ const StudentsTable: React.FC<IStudentsTableProps> = ({data,deleteStudent}) => {
                             dateStyle: "medium"
                         })}
                     </Td>
-                    <Td><TableOptions deleteEstablishment={(id)=>deleteStudent(id)} id={student.id} openModal={()=>openModal(student.id)}/> </Td>
+                    <Td><TableOptions link='/administrator/students' deleteEstablishment={(id)=>deleteStudent(id)} id={student.id} openModal={()=>openModal(student.id)}/> </Td>
                 </TrBody>
                 ))
             }
             </Tbody>
         </Table>
 
-        {/* {
-        updateModal && <UpdateEstablishmentModal getEstablishments={getEstablishments} establishmentId={idSelected} closeModal={()=>setUpdateModal(false)}/>
-        } */}
+        {
+            updateModal && <UpdateStudentModal getEstablishments={getStudents} establishmentId={idSelected} closeModal={()=>setUpdateModal(false)}/>
+        }
     </TableContainer>
   )
 }

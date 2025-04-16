@@ -2,6 +2,7 @@ import { IStudentById } from "../../Core/application/dto/student/get-student-byI
 import { IStudents } from "../../Core/application/dto/student/get-students.dto";
 import { IPostStudentsResponse } from "../../Core/application/dto/student/post-student-response.dto";
 import { IPostStudents } from "../../Core/application/dto/student/post-student.dto";
+import { IPutStudentsResponse } from "../../Core/application/dto/student/put-student-response.dto";
 import { errorAlert, successAlert } from "../utils/alerts";
 import { HttpClient } from "../utils/client-http";
 
@@ -51,4 +52,15 @@ export class StudentService{
             throw error
         }
     }
+
+        async updateStudent(url:string, id:string, body:IPostStudents):Promise<IPutStudentsResponse>{
+            try{
+                const updatedStudent = await this.httpClient.put<IPutStudentsResponse, IPostStudents>(`${url}/${id}`, body);
+                successAlert('Estudiante actualizado exitosamente')
+                return updatedStudent
+            }catch(error){
+                errorAlert((error as { message: string }).message);
+                throw error
+            }
+        }
 }

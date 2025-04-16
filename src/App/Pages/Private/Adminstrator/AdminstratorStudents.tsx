@@ -42,7 +42,7 @@ function AdminstratorStudents() {
 
         {openModal && <StudentModal getStudents={getStudents} closeModal={()=>setOpenModal(false)}/>}
 
-        <StudentsTable deleteStudent={deleteStudent} data={students}/>
+        <StudentsTable getStudents={getStudents} deleteStudent={deleteStudent} data={students}/>
     </AdministratorLayout>
   )
 }

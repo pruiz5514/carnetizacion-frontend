@@ -57,7 +57,7 @@ const EstablishmentsTable:React.FC<IEstablishmentsTableProps> = ({data, deleteEs
                             dateStyle: "medium"
                         })}
                     </Td>
-                    <Td><TableOptions deleteEstablishment={(id)=>deleteEstablishment(id)} id={establishment.id} openModal={()=>openModal(establishment.id)}/> </Td>
+                    <Td><TableOptions link='/administrator/establishments' deleteEstablishment={(id)=>deleteEstablishment(id)} id={establishment.id} openModal={()=>openModal(establishment.id)}/> </Td>
                   </TrBody>
                 ))
               }
